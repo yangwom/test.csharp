@@ -7,19 +7,21 @@ namespace test_message.Test;
 
 public class TestPrint
 {
-    [Theory]
-    [InlineData()]
+    [Theory(DisplayName = "testando o parametro de print")]
+    [InlineData("Ola", "Ola")]
+    [InlineData("Breno o melhor", "Breno o melhor")]
+    [InlineData("Meirelles topzeira", "Meirelles topzeira")]
     public void TestPrintMsgSucess(string Send, string Expected)
     {
         using (var NewOutput = new StringWriter())
         {
             Console.SetOut(NewOutput);
 
-            Message.PrintMsg();
+            Message.PrintMsg(Send);
 
             string result = NewOutput.ToString().Trim();
 
-            result.Should();      
+            result.Should().Be(Expected);      
         }
     }
 }
